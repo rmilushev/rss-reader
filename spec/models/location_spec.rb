@@ -1,9 +1,13 @@
 require 'rails_helper'
 
-# RSpec.describe Location, type: :model do
-#   pending
-# end
-#
-describe Location, 'validation' do
-  it { should validate_presence_of(:url) }
+describe Location do
+  it 'has a valid factory' do
+    expect(build(:location)).to be_valid
+  end
+
+  let(:rss_feed) { build(:location, url: nil) }
+
+  describe ' ActiveModel validations' do
+    it { expect(rss_feed).to_not be_valid }
+  end
 end
