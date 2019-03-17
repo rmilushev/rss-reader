@@ -1,0 +1,13 @@
+= form_for @location, html: {class: 'form-inline'} do |f|
+  - if @location.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@location.errors.count, "error")} prohibited this location from being saved:"
+      %ul
+        - @location.errors.full_messages.each do |message|
+          %li= message
+
+  .form-group
+    .field.col-auto
+      = f.text_field :url, class: 'form-control', placeholder: 'RSS url:'
+    .actions.col-auto
+      = f.submit 'Save', class: 'btn btn-primary'

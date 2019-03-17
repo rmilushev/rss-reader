@@ -1,0 +1,22 @@
+%h3 Listing RSS entries
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @locations.each do |location|
+      %tr
+        %td= location.title
+        %td= link_to 'Edit', edit_location_path(location),
+          class: 'btn btn-outline-success'
+        %td= link_to 'Destroy', location, method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: 'btn btn-outline-danger'
+
+%br
+
+= link_to 'New Location', new_location_path
