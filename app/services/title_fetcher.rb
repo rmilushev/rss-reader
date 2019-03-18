@@ -1,4 +1,5 @@
 class TitleFetcher
+  require 'rss'
   def self.get_channel_title(url)
     rss = Addressable::URI.parse url
     feed = RSS::Parser.parse(rss)
