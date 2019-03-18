@@ -13,7 +13,8 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    channel_title = TitleFetcher.get_channel_title(location_params['url'])
+    @location = Location.new(location_params.merge({title: channel_title}))
 
     respond_to do |format|
       if @location.save
@@ -25,8 +26,9 @@ class LocationsController < ApplicationController
   end
 
   def update
+    channel_title = TitleFetcher.get_channel_title(location_params['url'])
     respond_to do |format|
-      if @location.update(location_params)
+      if @location.update(location_params.merge({title: channel_title}))
         format.html { redirect_to root_path, notice: 'RSS feed entry was successfully updated.' }
       else
         format.html { render :edit }
@@ -42,11 +44,11 @@ class LocationsController < ApplicationController
   end
 
   private
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(:title, :url)
-    end
+  def location_params
+    params.require(:location).permit(:title, :url)
+  end
 end
