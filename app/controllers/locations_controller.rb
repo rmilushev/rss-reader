@@ -18,7 +18,8 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to root_path, notice: 'RSS feed entry was successfully created.' }
+        format.html { redirect_to root_path,
+                      notice: 'RSS feed entry was successfully created.' }
       else
         format.html { render :new }
       end
@@ -29,7 +30,8 @@ class LocationsController < ApplicationController
     channel_title = TitleFetcher.get_channel_title(location_params['url'])
     respond_to do |format|
       if @location.update(location_params.merge({title: channel_title}))
-        format.html { redirect_to root_path, notice: 'RSS feed entry was successfully updated.' }
+        format.html { redirect_to root_path,
+                      notice: 'RSS feed entry was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -39,7 +41,8 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'RSS feed entry was successfully destroyed.' }
+      format.html { redirect_to locations_url,
+                    notice: 'RSS feed entry was successfully destroyed.' }
     end
   end
 
