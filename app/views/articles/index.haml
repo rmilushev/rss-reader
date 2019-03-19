@@ -1,5 +1,5 @@
 %h3 Latest Articles from RSS feeds
 - @articles.each do |article|
   = link_to article.title, article.link, target: '_blank'
-  %c= "#{article.pubDate.strftime('%d/%m/%Y')} (#{article.guid.content[7,20]})"
+  %c= "#{article.pubDate.try(:strftime, '%d/%m/%Y')} (#{article.try(:guid).try(:content[7,20])})"
   %br

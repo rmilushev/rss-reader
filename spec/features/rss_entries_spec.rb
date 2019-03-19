@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 feature 'Listing RSS entries and changing them' do
-  before(:each) do
-    # create(:location)
-    # create(:location, title: 'Another RSS feed')
-  end
-
   it 'lists rss feeds' do
     create(:location)
     create(:location, title: 'Another RSS feed')
@@ -52,35 +47,5 @@ feature 'Listing RSS entries and changing them' do
     expect {
       click_on 'Destroy'
     }.to change(Location, :count).by(-1)
-  end
-
-  private
-
-  def feed
-    {title: 'Ruby News'}
-  end
-  def stub_rss_request
-        stub_request(:get, "http://www.ruby-lang.org/en/feeds/news.rss").
-      with(
-        headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent'=>'Ruby'
-        }).
-        to_return(status: 200, body: valid_xml_response, headers: {})
-  end
-
-  def valid_xml_response
-    <<-XML
-      <?xml version="1.0" encoding="UTF-8"?>
-        <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-          <channel>
-            <title>Ruby News</title>
-            <link>https://www.ruby-lang.org/en/feeds/news.rss</link>
-            <language>en-US</language>
-            <description>The latest news from ruby-lang.org.</description>
-          </channel>
-        </xml>
-    XML
   end
 end
