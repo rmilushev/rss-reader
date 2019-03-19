@@ -4,7 +4,8 @@ feature 'Listing most recent RSS articles' do
   it 'lists recent articles' do
     articles = [
       instance_double(
-        "Article", title: 'Article 1',
+        'Article',
+        title: 'Article 1',
         link: 'article_link.com',
         pubDate: Date.today,
       )
